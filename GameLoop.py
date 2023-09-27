@@ -71,10 +71,12 @@ while not game_over:
 
 
 
-     # need to calculate distance between airports
-    if player_range >= airportdistance():
-        print("You have enough range to get to your next destination")
-        input("\033[32mPress Enter to use your range\033[0m")
+     # calculate distance between airports
+    distance_km = airportdistance(current_airport, end_airport)
+
+    if player_range >= distance_km:
+        print(f"You have enough range to get to {end_airport}") #end_airport name
+        input(f"\033[32mPress Enter to use {distance_km} range\033[0m")
 
         # moves to next airport
         print("Welcome to {next airport}")
