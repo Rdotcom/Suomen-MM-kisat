@@ -1,6 +1,18 @@
-def airportdistance():
-    airportdistance
+import math
+from geopy import distance
+
+
+
+def airportinfo(): #icao
+    #sql database ident, name, latitude_deg, longitude_deg
+
+def airportdistance(current, target):
     # lasketaan lentomatka lentokenttien välillä
+    start = airportinfo(current)
+    end = airportinfo(target)
+    return distance.distance((start['latitude_deg'], start['longitude_deg']),
+                             (end['latitude_deg'], end['longitude_deg'])).km
+
 
 
 player_name = input("Enter your name: ")
@@ -10,7 +22,7 @@ player_lives = 3  # Starting lives
 game_over = False
 win = False
 
-starting_airport = "KJFK"  # tai airport[0]['ident']
+starting_airport = "KJFK"  # New York
 current_airport = starting_airport
 end_airport = "LAX"  # Los Angeles
 
@@ -41,11 +53,13 @@ while not game_over:
     print("You need to answer questions to get range")
     print("You have 15 seconds to answer the question")
     input("\033[34mPress Enter when you are ready to answer\033[0m") # Pauses the game before question
-    print(questions[0]['question'])
 
+    # need timelimit
+    # testi kysymys
+    print(questions[0]['question'])
     answer = input("Enter your answer: ")
 
-    # If all answers incorrect, goes back one airport
+    # add: if all answers incorrect, goes back one airport
     if answer.lower() == questions[0]['correctanswer'].lower():
         print("Correct answer!")
         player_range += 500
@@ -57,15 +71,13 @@ while not game_over:
 
 
 
-
-    airportdistance = 500 # need to calculate distance between airports
-
-    if player_range >= airportdistance:
+     # need to calculate distance between airports
+    if player_range >= airportdistance():
         print("You have enough range to get to your next destination")
         input("\033[32mPress Enter to use your range\033[0m")
 
-        # siirtyy seuraavaan lentokenttään
-        print("Welcome to {next_airport}")
+        # moves to next airport
+        print("Welcome to {next airport}")
         player_range -= airportdistance
 
     elif player_range <= 0 and money >= 100:
