@@ -49,6 +49,7 @@ while not game_over:
     # tarvii timelimit
     # kysymykset
 
+
     # jos vastaukset väärin, menee takaisin yhden lentokentän
     # jos yksi, kaksi tai kolme oikein, rangea lisää
     '''
