@@ -15,7 +15,7 @@ def airportdistance(current, target):
 
 
 
-player_name = input("Enter your name: ")
+player_name = input("Anna pelaaja nimi: ")
 money = 100  # Starting money
 player_range = 0  # Starting range
 player_lives = 3  # Starting lives
@@ -26,75 +26,69 @@ starting_airport = "KJFK"  # New York
 current_airport = starting_airport
 end_airport = "LAX"  # Los Angeles
 
-#test question
-questions = [
-    {
-        "question": "Mikä on kullan kemiallinen merkki?",
-        "choices": ["k", "au", "ag", "cu"],
-        "correctanswer": "au",
-        "time_limit": 15
-    }
-]
 
 # Game loop
 while not game_over:
-    # Check if the player has reached the destination
+    # Katsotaan onko pelaaja voittanut pelin
     if current_airport == end_airport:
-        print("You win! You have reached your destination!")
+        print("Sinä voitit pelin! Pääsit päätepysäkille!")
         game_over = True
         win = True
 
-    # Display player's current status
+    # Näyttää pelaajan tiedot
     airport = 'JFK Airport'  # Starting at JFK Airport
-    print(f"You have {money}$, {player_lives} lives left and {player_range} range")
+    print(f"Sinulla on {money}$, {player_lives} elämää jäljellä ja {player_range} rangea")
     print("\033[34m---------------------------------------\033[0m")
 
     # Ohjeita pelaajalle
-    print("You need to answer questions to get range")
-    print("You have 15 seconds to answer the question")
-    input("\033[34mPress Enter when you are ready to answer\033[0m") # Pauses the game before question
+    print(f"{player_name}, vastaa kysymyksiin, jotta saat lisää rangea")
+    print("Sinulla on 15 sekuntia aikaa vastata")
+    input("\033[34mPaina Enter kun olet valmis vastaamaan\033[0m") # Pauses the game before question
 
-    # need timelimit
-    # testi kysymys
-    print(questions[0]['question'])
-    answer = input("Enter your answer: ")
 
-    # add: if all answers incorrect, goes back one airport
+    # tarvii timelimit
+    # kysymykset
+
+    # jos vastaukset väärin, menee takaisin yhden lentokentän
+    # jos yksi, kaksi tai kolme oikein, rangea lisää
+    '''
+    answer = input("Anna vastaus: ")
+    
     if answer.lower() == questions[0]['correctanswer'].lower():
-        print("Correct answer!")
+        print("Oikea vastaus!")
         player_range += 500
     else:
-        print("Wrong answer! You lose range")
+        print("Väärä vastaus! Hävisit rangea")
         if player_range > 0:
             player_range -= 100
+    '''
 
 
 
-
-     # calculate distance between airports
-    distance_km = airportdistance(current_airport, end_airport)
+     # lasketaan lentomatka lentokenttien välillä
+    distance_km = airportdistance(current_airport, target_airport)
 
     if player_range >= distance_km:
-        print(f"You have enough range to get to {end_airport}") #end_airport name
-        input(f"\033[32mPress Enter to use {distance_km} range\033[0m")
+        print(f"Sinulla on tarpeeksi rangea lentää {target_airport}") # airport name
+        input(f"\033[32mPaina Enter käyttääksesi {distance_km} rangea\033[0m")
 
-        # moves to next airport
-        print("Welcome to {next airport}")
+        # menee seuraavaan lentokenttään
+        print("Tervetuloa {next airport}")
         player_range -= airportdistance
 
     elif player_range <= 0 and money >= 100:
-        print("You have run out of range")
-        print("You have chosen to buy another change for 100$")
+        print("Sinulta loppui range")
+        print("Päätit käyttää 100$ uuteen yritykseen")
         money -= 100
         # takaisin kysymykset kohtaan
 
     elif player_range <= 0 < player_lives and money <= 0:
-        print("You have run out of range and money")
-        print("You have lost one life")
-        print(f"{player_lives} lives left")
+        print("Sinulta loppui range ja rahat")
+        print("Päätit käyttää elämän uuteen yritykseen")
+        print(f"{player_lives} elämää jäljellä")
         player_lives -= 1
         # takaisin kysymykset kohtaan
     else:
-        print("You have run out of range, money and lives")
-        print("You have lost the game")
+        print("Sinulta loppui range, rahat ja elämät")
+        print("\033[31mHävisit pelin!\033[0m")
         game_over = True
