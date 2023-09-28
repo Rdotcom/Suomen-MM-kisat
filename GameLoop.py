@@ -15,10 +15,10 @@ def airportdistance(current, target):
 
 
 
-player_name = input("Anna pelaaja nimi: ")
-money = 100  # Starting money
-player_range = 0  # Starting range
-player_lives = 3  # Starting lives
+player_name = input("Anna pelaajan nimi: ")
+money = 100  # Aloitus rahat
+player_range = 0  # Aloitus range
+player_lives = 3  # Aloitus elämät
 game_over = False
 win = False
 
@@ -43,7 +43,7 @@ while not game_over:
     # Ohjeita pelaajalle
     print(f"{player_name}, vastaa kysymyksiin, jotta saat lisää rangea")
     print("Sinulla on 15 sekuntia aikaa vastata")
-    input("\033[34mPaina Enter kun olet valmis vastaamaan\033[0m") # Pauses the game before question
+    input("\033[34mPaina Enter kun olet valmis vastaamaan\033[0m") # Paussi ennen kysymyksiä
 
 
     # tarvii timelimit
