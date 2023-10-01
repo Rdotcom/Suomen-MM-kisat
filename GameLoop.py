@@ -43,7 +43,7 @@ while not game_over:
 
     # Näyttää pelaajan tiedot
     player_info = (f"Sinulla on {money:.0f}$, {player_lives} elämää jäljellä ja {player_range:.0f}km rangea")
-    leveys = len(text) + 4
+    leveys = len(player_info) + 4
     print("\033[34m" + "-" * leveys + "\033[0m")
     print(f"\033[34m| {player_info} |\033[0m")
     print("\033[34m" + "-" * leveys + "\033[0m")
