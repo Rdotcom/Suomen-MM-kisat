@@ -58,28 +58,25 @@ while not game_over:
 
 
     # timelimit
+
     starttime = time.time()
     player_answer = input("Vastaus: ")
     timetaken = time.time() - starttime
 
-    if timetaken > time_limit:
-        print("Aika loppui kesken!")
-    else:
-        print("Ehdit vastata ajoissa!")
 
     # jos vastaukset väärin, menee takaisin yhden lentokentän
     # jos yksi, kaksi tai kolme oikein, rangea lisää
-    if correctanswer == 3:
-        print("Sait kaikki vastaukset oikein!")
+    if correctanswer == 3 and timetaken < time_limit:
+        print("Ehdit vastata kaikkiin kysymyksiin oikein!")
         player_range += 1500
-    elif correctanswer == 2:
-        print("Sait kaksi vastausta oikein!")
+    elif correctanswer == 2 and timetaken < time_limit:
+        print("Ehdit vastata kahteen kysymykseen oikein!")
         player_range += 1000
-    elif correctanswer == 1:
-        print("Sait yhden vastauksen oikein!")
+    elif correctanswer == 1 and timetaken < time_limit:
+        print("Sait yhden vastauksen oikein ajoissa!")
         player_range += 500
     else:
-        print("Sait kaikki vastaukset väärin! Menet takaisin yhden lentokentän")
+        print("Sait kaikki vastaukset väärin tai aikasi loppui kesken! Menet takaisin yhden lentokentän")
         if currect_airport != "KJFK":
             current_airport = 1#menee takaisin yhden lentokentän
 
