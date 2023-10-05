@@ -140,7 +140,7 @@ def main():
     player_range = 5000
 
     played = 0
-
+    yritykset = 0
     # count the player score
     score = 0
 
@@ -156,8 +156,8 @@ def main():
     game_id = create_game(points, player_range, start_fields, player, all_fields)
 
     while not game_over:
-        print(f'Ottelut {played}/7. Voitot {score}/{played}. '
-              f'Sinulla on jäljellä {7 - played} ottelua.')
+        print(f'Ottelut: {played}/7. Voitot: {score}/{played}. Matkustuskerrat: {yritykset}'
+              f' Sinulla on jäljellä {7 - played} ottelua.')
         # get current airport info
         airport = get_field_info(current_field)
         print(f"Saavuit jalkapallokentälle: {airport['name']}.")
@@ -169,6 +169,7 @@ def main():
             print('Tällä kentällä on vastustaja. Valmistaudu!')
             print(f"Tämän ottelun vastustaja on {goal['name']}...")
             winning_team = penalty_shootout(goal['name'])
+            yritykset += 1
             if winning_team == 'Suomi':
                 score += 1
                 played += 1
@@ -182,6 +183,12 @@ def main():
 
         else:
             print(f'Tällä kentällä ei ole vastustajaa. Siirry seuraavalle kentälle')
+            yritykset += 1
+
+        # if yritykset <= 3 and played <= 3:
+        #     print(f'Löysit kolmella ensimmäisellä kerralla vastustajia. Pääset suoraan Finaaliin!')
+        #     penalty_shootout()
+
 
         if played >= 3 and lohkopeli_voitot >= 2:
             print(f'Onnittelut! Selvisit pudotuspelikierrokselle!')
@@ -221,6 +228,8 @@ def main():
                 if played >= 7 and pudotuspeli_voitot >= 4 or pudotuspeli_häviöt > 0:
                     game_over = True
                 vaiheet = ['16-parhaan joukko', '8-parhaan joukko', 'Semi-finaali', 'Finaali']
+                print(f'Ottelut: {played}/7. Voitot: {score}/{played}. Matkustuskerrat: {yritykset}'
+                      f' Sinulla on jäljellä {7 - played} ottelua.')
                 print(f'Pudotuspelivaihe: {vaiheet[i]}.')
                 input(Fore.BLUE + 'Paina Enteriä selvittääksesi onko kentällä vastustaja...' + Fore.RESET)
                 goal = check_goal(game_id, current_field)
@@ -228,6 +237,7 @@ def main():
                     print('Tällä kentällä on vastustaja. Valmistaudu!')
                     print(f"Tämän ottelun vastustaja on {goal['name']}...")
                     winning_team = penalty_shootout(goal['name'])
+                    yritykset += 1
                     if winning_team == 'Suomi':
                         score += 1
                         played += 1
@@ -277,6 +287,7 @@ def main():
                         game_over = True
                 else:
                     print(f'Tällä kentällä ei ole vastustajaa. Siirry seuraavalle kentälle')
+                    yritykset += 1
                     fields = fields_in_range(current_field, all_fields, player_range)
                     print(f'Voit lentää näin monelle jalkapallokentälle {len(fields) - len(visited_fields)}.')
                     print('Jalkapallokentät:')
@@ -348,7 +359,7 @@ def main():
         print(Fore.LIGHTYELLOW_EX + 'Se oli siinä! POIKA TULI KOTIIN!!!' + Fore.RESET)
         print(Fore.LIGHTYELLOW_EX + 'Pelasit turnauksen kunniakkaasti loppuun ja voitit jokaisen ottelun!' + Fore.RESET)
         print(Fore.LIGHTYELLOW_EX + 'SUOMI ON MAAILMANMESTARI!' + Fore.RESET)
-        print(f'Pelasit {played} ottelua ja voitit {score} ottelua. Sait {points} verran pisteitä!')
+        print(f'Pelasit {played} ottelua ja voitit {score} ottelua. Matkustuskertoja tuli {yritykset} kappaletta!')
     else:
         print(f'Taistelit hienosti, mutta et valitettavasti voittanut jokaista peliä.')
         print(f'Pelasit {played} ottelua ja voitit {score} ottelua. Sait {points} verran pisteitä!')
