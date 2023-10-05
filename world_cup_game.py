@@ -108,6 +108,7 @@ def update_location(icao, p_range, u_points, g_id):
 # game stars
 # game loop
 def main():
+    print(story.colored_text)
     visited_fields = []
     lohkopeli_voitot = 0
     storyDialog = input('Haluatko lukea pelin tarinan? (K/E): ').lower()

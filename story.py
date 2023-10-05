@@ -84,6 +84,34 @@ kanada = (
 )
 
 
+from colorama import Fore
+
+text = """
+  ____  _   _  ___  __  __ _____ _   _     __  __ __  __       _  _____ ____    _  _____ 
+ / ___|| | | |/ _ \|  \/  | ____| \ | |   |  \/  |  \/  |     | |/ /_ _/ ___|  / \|_   _|
+ \___ \| | | | | | | |\/| |  _| |  \| |   | |\/| | |\/| |_____| ' / | |\___ \ / _ \ | |  
+  ___) | |_| | |_| | |  | | |___| |\  |   | |  | | |  | |_____| . \ | | ___) / ___ \| |  
+ |____/ \___/ \___/|_|  |_|_____|_| \_|   |_|  |_|_|  |_|     |_|\_\___|____/_/   \_\_|  
+"""
+
+# Suomen lipun värit: sininen, valkoinen ja punainen
+colors = [Fore.BLUE, Fore.WHITE, Fore.RED]
+
+# Väritetään teksti Suomen lipun väreissä
+colored_text = ""
+color_idx = 0  # Indeksi värien vaihtamiseksi
+
+for char in text:
+    if char.isalpha():
+        # Väritetään kirjaimet Suomen lipun väreissä
+        colored_text += f"{colors[color_idx % len(colors)]}{char}"
+        color_idx += 1
+    else:
+        # Jätetään muut merkit alkuperäisessä värissään
+        colored_text += char
+
+
+
 
 
 
