@@ -336,5 +336,5 @@ if __name__ == "__main__":
 # TODO
 """ 
 Parantele pelin käyttettävyyttä yksinkertaistamalla ja selkeyttämällä python terminaalia.
-Jos ehdit lisää vinkki kysymyksiä ja muita pelejä
+Jos ehdit lisää vinkki kysymyksiä ja muita pelejä.
 """
