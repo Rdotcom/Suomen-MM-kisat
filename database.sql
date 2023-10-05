@@ -56,8 +56,6 @@ VALUES
 (11, 'KSFS', 'SoFi Stadium, USA', 33.953587, -118.339630, 'NA', 'US'),
 (12, 'KHRS', 'Hard Rock Stadium, USA', 25.957960, -80.239311, 'NA', 'US'),
 (13, 'KMLS', 'MetLife Stadium, USA', 40.813778, -74.074310, 'NA', 'US'),
-
-
 (14, 'KLFF', 'Lincoln Financial Field, USA', 39.900898, -75.168098, 'NA', 'US'),
 (15, 'KLSS', 'Levis Stadium, USA', 37.4020148919, -121.968869091, 'NA', 'US'),
 (16, 'KCLF', 'CenturyLink Field, USA', 47.590497638, -122.325665364, 'NA', 'US');
