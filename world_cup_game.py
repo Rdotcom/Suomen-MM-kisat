@@ -125,7 +125,7 @@ def main():
     usa = story.yhdysvallat
     meksiko = story.meksiko
     kanada = story.kanada
-    print(f'Tervetuloa {usa}, {meksiko} ja {kanada} 2026 MM-kisoihin.')
+    print(f'Tervetuloa {usa} {story.statue_of_liberty_emoji}, {meksiko} {story.cactus_emoji} ja {kanada} {story.maple_emoji} 2026 MM-kisoihin.')
     player = input('Syötä pelaaja nimesi: ')
 
     # check if the game is over
@@ -161,13 +161,13 @@ def main():
               f' Sinulla on jäljellä {7 - played} ottelua.')
         # get current airport info
         airport = get_field_info(current_field)
-        print(f"Saavuit jalkapallokentälle: {airport['name']}.")
+        print(f"Saavuit jalkapallokentälle: {airport['name']} {story.landing_airplane_emoji}.")
         input(Fore.BLUE + 'Paina Enteriä selvittääksesi onko kentällä vastustaja...' + Fore.RESET)
         # if airport has an opponent the player plays them
         # check the goal type and add if wins
         goal = check_goal(game_id, current_field)
         if goal:
-            print('Tällä kentällä on vastustaja. Valmistaudu!')
+            print(f'Tällä kentällä on vastustaja. {story.check_mark_emoji} Valmistaudu!')
             print(f"Tämän ottelun vastustaja on {goal['name']}...")
             winning_team = penalty_shootout(goal['name'])
             yritykset += 1
@@ -183,19 +183,19 @@ def main():
                 played += 1
 
         else:
-            print(f'Tällä kentällä ei ole vastustajaa. Siirry seuraavalle kentälle')
+            print(f'Tällä kentällä ei ole vastustajaa. {story.x_emoji} Siirry seuraavalle kentälle. {story.next_emoji}')
             yritykset += 1
 
-        # if yritykset <= 3 and played <= 3:
-        #     print(f'Löysit kolmella ensimmäisellä kerralla vastustajia. Pääset suoraan Finaaliin!')
-        #     penalty_shootout()
+        # if yritykset <= 3 and played <= 3 and score == 3:
+        #     print(f'Löysit kolmella ensimmäisellä yrityksellä vastustajia ja voitit jokaisen niistä!')
+        #     game_over = True
 
 
         if played >= 3 and lohkopeli_voitot >= 2:
-            print(f'Onnittelut! Selvisit pudotuspelikierrokselle!')
+            print(f'Onnittelut! Selvisit pudotuspelikierrokselle! {story.smiley_emoji}')
             fields = fields_in_range(current_field, all_fields, player_range)
-            print(f'Voit lentää näin monelle jalkapallokentälle {len(fields) - len(visited_fields)}.')
-            print('Jalkapallokentät:')
+            print(f'Voit lentää näin monelle jalkapallokentälle {len(fields) - len(visited_fields)}.{story.takeoff_airplane_emoji}')
+            print(f'Jalkapallokentät{story.stadium_emoji}:')
             for field in fields:
                 if field['ident'] in visited_fields:
                     f_distance = calculate_distance(current_field, field['ident'])
@@ -218,9 +218,9 @@ def main():
                         visited_fields.append(current_field)
                         break  # Poistutaan silmukasta, kun käyttäjän syöte on kelvollinen
                     else:
-                        print("Virheellinen syöte. Syötä kohdekenttä listalta.")
+                        print(f"Virheellinen syöte. {story.x_emoji} Syötä kohdekenttä listalta.")
                 except ValueError:
-                    print("Virheellinen syöte. Syötä kohdekentän ICAO-koodi.")
+                    print(f"Virheellinen syöte. {story.x_emoji} Syötä kohdekentän ICAO-koodi.")
 
             i = 0
             pudotuspeli_voitot = 0
@@ -235,7 +235,7 @@ def main():
                 input(Fore.BLUE + 'Paina Enteriä selvittääksesi onko kentällä vastustaja...' + Fore.RESET)
                 goal = check_goal(game_id, current_field)
                 if goal:
-                    print('Tällä kentällä on vastustaja. Valmistaudu!')
+                    print(f'Tällä kentällä on vastustaja. {story.check_mark_emoji} Valmistaudu!')
                     print(f"Tämän ottelun vastustaja on {goal['name']}...")
                     winning_team = penalty_shootout(goal['name'])
                     yritykset += 1
@@ -252,8 +252,8 @@ def main():
                         else:
                             # Move to the next field
                             fields = fields_in_range(current_field, all_fields, player_range)
-                            print(f'Voit lentää näin monelle jalkapallokentälle {len(fields) - len(visited_fields)}.')
-                            print('Jalkapallokentät:')
+                            print(f'Voit lentää näin monelle jalkapallokentälle {len(fields) - len(visited_fields)} {story.takeoff_airplane_emoji}.')
+                            print(f'Jalkapallokentät {story.stadium_emoji}:')
                             for field in fields:
                                 if field['ident'] in visited_fields:
                                     f_distance = calculate_distance(current_field, field['ident'])
@@ -269,7 +269,7 @@ def main():
                                 try:
                                     dest = input('Syötä kohdekentän ICAO: ').upper()
                                     if dest in visited_fields:
-                                        print(Fore.RED + "Olet jo vieraillut tässä kentässä!" + Fore.RESET)
+                                        print(Fore.RED + f"Olet jo vieraillut tässä kentässä!{story.x_emoji}" + Fore.RESET)
                                     elif dest in [field['ident'] for field in fields]:
                                         selected_distance = calculate_distance(current_field, dest)
                                         update_location(dest, player_range, points, game_id)
@@ -277,21 +277,21 @@ def main():
                                         visited_fields.append(current_field)
                                         break  # Poistutaan silmukasta, kun käyttäjän syöte on kelvollinen
                                     else:
-                                        print("Virheellinen syöte. Syötä kohdekenttä listalta.")
+                                        print(f"Virheellinen syöte.{story.x_emoji} Syötä kohdekenttä listalta.")
                                 except ValueError:
-                                    print("Virheellinen syöte. Syötä kohdekentän ICAO-koodi.")
+                                    print(f"Virheellinen syöte.{story.x_emoji} Syötä kohdekentän ICAO-koodi.")
                     else:
-                        print(f'Voi ei! Hävisit rangaistuspotkukilpailun!'
+                        print(f'Voi ei! Hävisit rangaistuspotkukilpailun!{story.sad_emoji}'
                               f' Tällä kertaa matkasi loppui pudotuspelivaiheeseen: {vaiheet[i]}.')
                         pudotuspeli_häviöt += 1
                         played += 1
                         game_over = True
                 else:
-                    print(f'Tällä kentällä ei ole vastustajaa. Siirry seuraavalle kentälle')
+                    print(f'Tällä kentällä ei ole vastustajaa. {story.x_emoji} Siirry seuraavalle kentälle. {story.next_emoji}')
                     yritykset += 1
                     fields = fields_in_range(current_field, all_fields, player_range)
-                    print(f'Voit lentää näin monelle jalkapallokentälle {len(fields) - len(visited_fields)}.')
-                    print('Jalkapallokentät:')
+                    print(f'Voit lentää näin monelle jalkapallokentälle {len(fields) - len(visited_fields)} {story.takeoff_airplane_emoji}.')
+                    print(f'Jalkapallokentät {story.stadium_emoji}:')
                     for field in fields:
                         if field['ident'] in visited_fields:
                             f_distance = calculate_distance(current_field, field['ident'])
@@ -314,13 +314,13 @@ def main():
                                 visited_fields.append(current_field)
                                 break  # Poistutaan silmukasta, kun käyttäjän syöte on kelvollinen
                             else:
-                                print("Virheellinen syöte. Syötä kohdekenttä listalta.")
+                                print(f"Virheellinen syöte. {story.x_emoji} Syötä kohdekenttä listalta.")
                         except ValueError:
-                            print("Virheellinen syöte. Syötä kohdekentän ICAO-koodi.")
+                            print(f"Virheellinen syöte. {story.x_emoji} Syötä kohdekentän ICAO-koodi.")
 
         if played >= 3 and lohkopeli_voitot < 2:
             print(f'Valitettavasti et voittanut kahta peliä kolmesta lohkopeliotteluista.'
-                  f'Sinun MM-kisa taivel päättyy tähän. Parempaa onnea seuraaviin kisoihin!')
+                  f'Sinun MM-kisa taivel päättyy tähän...')
             game_over = True
 
         if played == 7:
@@ -328,8 +328,8 @@ def main():
 
         if played < 3:
             fields = fields_in_range(current_field, all_fields, player_range)
-            print(f'Voit lentää näin monelle jalkapallokentälle {len(fields) - len(visited_fields)}.')
-            print('Jalkapallokentät:')
+            print(f'Voit lentää näin monelle jalkapallokentälle {len(fields) - len(visited_fields)} {story.takeoff_airplane_emoji}.')
+            print(f'Jalkapallokentät {story.stadium_emoji}:')
             for field in fields:
                 if field['ident'] in visited_fields:
                     f_distance = calculate_distance(current_field, field['ident'])
@@ -344,7 +344,7 @@ def main():
                 try:
                     dest = input('Syötä kohdekentän ICAO: ').upper()
                     if dest in visited_fields:
-                        print(Fore.RED + "Olet jo vieraillut tässä kentässä!" + Fore.RESET)
+                        print(Fore.RED + f"Olet jo vieraillut tässä kentässä! {story.x_emoji}" + Fore.RESET)
                     elif dest in [field['ident'] for field in fields]:
                         selected_distance = calculate_distance(current_field, dest)
                         update_location(dest, player_range, points, game_id)
@@ -352,18 +352,27 @@ def main():
                         visited_fields.append(current_field)
                         break  # Poistutaan silmukasta, kun käyttäjän syöte on kelvollinen
                     else:
-                        print("Virheellinen syöte. Syötä kohdekenttä listalta.")
+                        print(f"Virheellinen syöte. {story.x_emoji} Syötä kohdekenttä listalta.")
                 except ValueError:
-                    print("Virheellinen syöte. Syötä kohdekentän ICAO-koodi.")
+                    print(f"Virheellinen syöte. {story.x_emoji} Syötä kohdekentän ICAO-koodi.")
 
     if score == 7:
-        print(Fore.LIGHTYELLOW_EX + 'Se oli siinä! POIKA TULI KOTIIN!!!' + Fore.RESET)
-        print(Fore.LIGHTYELLOW_EX + 'Pelasit turnauksen kunniakkaasti loppuun ja voitit jokaisen ottelun!' + Fore.RESET)
-        print(Fore.LIGHTYELLOW_EX + 'SUOMI ON MAAILMANMESTARI!' + Fore.RESET)
-        print(f'Pelasit {played} ottelua ja voitit {score} ottelua. Matkustuskertoja tuli {yritykset} kappaletta!')
+        print(Fore.LIGHTYELLOW_EX + f'Se oli siinä! POIKA TULI KOTIIN!!!{story.trophy}{story.trophy}{story.trophy}' + Fore.RESET)
+        print(Fore.LIGHTYELLOW_EX + f'Pelasit turnauksen kunniakkaasti loppuun ja voitit jokaisen ottelun!{story.fanfare_emoji}' + Fore.RESET)
+        print(Fore.LIGHTYELLOW_EX + f'SUOMI ON MAAILMANMESTARI!{story.number1_emoji}' + Fore.RESET)
+        print(f'Tilastot{story.diagram_emoji}')
+        print(f'Ottelut: {story.football_emoji} | Voitot: {story.number1_emoji} | Matkustuskerrat: {story.airplane_emoji}')
+        print('-' * 30)
+        print(f'{played:<11} | {score:<10} | {yritykset:<16} |')
+        print(f'Loistava suoritus {story.smiley_emoji}')
+    # elif yritykset == 3 and played == 3:
+    #     print(f'mitäs tehdään')
     else:
-        print(f'Taistelit hienosti, mutta et valitettavasti voittanut jokaista peliä.')
-        print(f'Pelasit {played} ottelua ja voitit {score} ottelua. Sait {points} verran pisteitä!')
+        print(f'Taistelit hienosti, mutta et valitettavasti voittanut jokaista peliä.{story.sad_emoji}')
+        print(f'Tilastot: {story.diagram_emoji}')
+        print(f'Ottelut: {story.football_emoji} | Voitot: {story.number1_emoji} | Matkustuskerrat: {story.airplane_emoji}')
+        print('-' * 30)
+        print(f'{played:<11} | {score:<10} | {yritykset:<16} |')
         print(f'Parempaa menestystä seuraavalle kerralle!')
 
 
@@ -372,6 +381,6 @@ if __name__ == "__main__":
 
 # TODO
 """ 
-Lisää vastustajan etsimiseen, joku idea. (CO2 päästöt?, nopeuskisa?...)
-Lisää oikoreiti (if == jotain --> pääset tiettyyn kohtaan peliä) 
+Lisää vastustajan etsimiseen joku idea. (CO2 päästöt?, nopeuskisa?...)
+Lisää oikoreiti testauksia varten (if == jotain --> pääset tiettyyn kohtaan peliä) 
 """

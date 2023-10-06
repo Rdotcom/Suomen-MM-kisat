@@ -4,7 +4,7 @@ CENTER = 0
 LEFT = 1
 RIGHT = 2
 
-
+O = "\u26BD"
 def dive():
     number = random.randint(1, 2)
     return number
@@ -20,16 +20,16 @@ def goal(kick_direction, dive_direction):
 
 def print_ball(ball):
     if ball == 1:
-        print("-----------------")
-        print("| O             |")
-        print("|               |")
-        print("|               |")
+        print(f"------------------")
+        print(f"| {O}             |")
+        print(f"|                |")
+        print(f"|                |")
 
     if ball == 2:
-        print("-----------------")
-        print("|             O |")
-        print("|               |")
-        print("|               |")
+        print(f"------------------")
+        print(f"|             {O} |")
+        print(f"|                |")
+        print(f"|                |")
 
 
 def print_goalkeeper(goalkeeper):
