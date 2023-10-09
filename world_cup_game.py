@@ -370,8 +370,6 @@ def main():
         print('-' * 30)
         print(f'{played:<11} | {score:<10} | {yritykset:<19} | {co2_consumed:<8}')
         print(f'Loistava suoritus {story.smiley_emoji}')
-    # elif yritykset == 3 and played == 3:
-    #     print(f'mitäs tehdään')
     else:
         print(f'Taistelit hienosti, mutta et valitettavasti voittanut jokaista peliä.{story.sad_emoji}')
         print(f'Tilastot: {story.diagram_emoji}')

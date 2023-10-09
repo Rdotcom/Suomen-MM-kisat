@@ -47,15 +47,15 @@ def print_goalkeeper(goalkeeper):
 
 
 def penalty_shootout(team):
-    seed_number = 87
-    random.seed(seed_number)
+    # seed_number = 87
+    # random.seed(seed_number)
 
     print("-----------------")
     print("|     _ o _     |")
     print("|       |       |")
     print("|      / \      |")
 
-    number_of_rounds = 1
+    number_of_rounds = 5
     team1 = 'Suomi'
     team2 = team
     game_continues = True
