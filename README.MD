@@ -42,7 +42,6 @@ Tämä peli käyttää relaatiotietokantakurssin tietokantaa pohjana.
 );
       charset = latin1;
    
-   ```
    ```sql
     create table world (
    id int not null auto_increment primary key,
