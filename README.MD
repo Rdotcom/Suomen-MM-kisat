@@ -51,7 +51,7 @@ Tämä peli käyttää relaatiotietokantakurssin tietokantaa pohjana.
    probability int null
 );
     
-     insert into world (name, points, probability)
+INSERT INTO world (name, points, probability)
 VALUES 
 	('Yhdysvallat', 100, 1),
    ('Kanada', 200, 1),
