@@ -5,7 +5,6 @@ Olet taistellut urhoollisesti karsintavaiheen läpi ja tehnyt maastasi ylpeän. 
 Oletko valmis? Aloitit tiesi kunniaan ja kuuluisuuteen ensimmäiseltä lentokentältä.Olet päättänyt tuoda iloa ja tehdä maanmiehistäsi ylpeitä. 
 Saavut ensimmäiselle jalkapallokentälle ja pidät siellä valmistautumisleirin. Jatkat sieltä seuraavalle kentälle ja pelaat siellä ensimmäisen rangaistuspotkukilpailusi. 
 Pelaat viisaasti ja voitat Yhdysvallat, joka oli ensimmäinen vastustajasi. Pelaat loput lohkopelisi ja voitat kaksi ensimmäistä peliä. Varmistat itsellesi paikan pudotuspeleihin ja kolmanteen peliin menet rennolla fiiliksellä.
-
 Pudotuspelivaihe alkaa ja nyt on kyllä kovan paikka. Se on Messin johtama Argentiina. Tiedät jo, että mikäli voitat heidät, palkinto tulee olemaan valtava. 
 Menet sinne ja näytät heille, mistä olet tehty. Teet turnauksen ensimmäisen yllätyksen ja voitat heidät! Etenet 8-parhaan joukkoon.
 Tarinan edetessä siirryt seuraaville lentokentille ja dominoit vastustajiasi. Viimein saavut jollekin jäljellä olevaan lentokenttään ja sieltä löydät viimeisen vastustajasi.
@@ -16,8 +15,8 @@ Pelaat finaalin viileästi ja voitat sen. OLET MAAILMANMESTARI!!! Saavutit tavoi
 story1 = textwrap.fill(story, 95)
 
 rules = """Pelin nimi on Suomen MM-kisat. Peli on Jalkapallon MM-kisojen inspiroima. Pelin tarkoitus on kierrellä tulevien MM-kisojen jalkapallostadioneita ja etsiä vastustajia.
-Pelin lähtöpiste arvotaan pelin alussa satunnaisesti. Pelin tarkoituksena on edetä lähtöpisteeltä ja löytää vastustajia eri kentiltä.
-Vastustajia vastaan pelataan perinteinen rangaistuspotkukilpailu. MM-kisoissa finaalin asti selviytyneet pelaavat enintään seitsemän peliä.
+Pelin lähtöpiste arvotaan pelin alussa satunnaisesti. Pelin tarkoituksena on edetä lähtöpisteeltä ja löytää vastustajia eri kentiltä. Jokainen matkustuskerta lisää CO2 päästöjä 200. Yksi pelin tavoitteista on tuottaa mahdollisimman vähän päästöjä.
+Mitä vähemmillä matkustuskerroilla löydät vastustajat, sitä parempi. Vastustajia vastaan pelataan perinteinen rangaistuspotkukilpailu. MM-kisoissa finaalin asti selviytyneet pelaavat enintään seitsemän peliä.
 Tässä pelissä on myös seitsemän ennalta määriteltyä vastustajaa. Pelissä edetään niin kuin MM-kisoissa ja tavoite on voittaa jokainen ottelu.
 Pelin voittaa vain, jos etenee finaaliin asti ja voittaa finaalin. Pelin vastustajat on arvottu satunnaisesti pelin 16 eri jalkapallostadionille.
 Pelaajan tehtävä on matkustella eri jalkapallostadioneille ja löytää vastustajat. Pelissä ei voi palata samalle lentokentälle tai pelata samaa vastustajaa vastaan uudestaan.
@@ -30,7 +29,7 @@ rules1 = textwrap.fill(rules, 95)
 
 
 def get_story():
-    max_width = max(len(line) for line in rules1.splitlines())
+    max_width = max(len(line) for line in story1.splitlines())
     print('+' + '-' * (max_width + 2) + '+')
     for line in story1.splitlines():
         print(f'| {line.ljust(max_width)} |')
@@ -129,3 +128,4 @@ statue_of_liberty_emoji = '🗽'
 cactus_emoji = '🌵'
 maple_emoji = '🍁'
 diagram_emoji = '📊'
+co2_emoji = '🌍🏭'

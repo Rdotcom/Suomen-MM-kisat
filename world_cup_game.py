@@ -142,6 +142,7 @@ def main():
 
     played = 0
     yritykset = 0
+    co2_consumed = 0
     # count the player score
     score = 0
 
@@ -157,7 +158,7 @@ def main():
     game_id = create_game(points, player_range, start_fields, player, all_fields)
 
     while not game_over:
-        print(f'Ottelut: {played}/7. Voitot: {score}/{played}. Matkustuskerrat: {yritykset}'
+        print(f'Ottelut: {played}/7. Voitot: {score}/{played}. Matkustuskerrat: {yritykset}. CO2 päästöt: {co2_consumed}.'
               f' Sinulla on jäljellä {7 - played} ottelua.')
         # get current airport info
         airport = get_field_info(current_field)
@@ -171,6 +172,7 @@ def main():
             print(f"Tämän ottelun vastustaja on {goal['name']}...")
             winning_team = penalty_shootout(goal['name'])
             yritykset += 1
+            co2_consumed += 200
             if winning_team == 'Suomi':
                 score += 1
                 played += 1
@@ -185,6 +187,7 @@ def main():
         else:
             print(f'Tällä kentällä ei ole vastustajaa. {story.x_emoji} Siirry seuraavalle kentälle. {story.next_emoji}')
             yritykset += 1
+            co2_consumed += 200
 
         # if yritykset <= 3 and played <= 3 and score == 3:
         #     print(f'Löysit kolmella ensimmäisellä yrityksellä vastustajia ja voitit jokaisen niistä!')
@@ -194,7 +197,7 @@ def main():
         if played >= 3 and lohkopeli_voitot >= 2:
             print(f'Onnittelut! Selvisit pudotuspelikierrokselle! {story.smiley_emoji}')
             fields = fields_in_range(current_field, all_fields, player_range)
-            print(f'Voit lentää näin monelle jalkapallokentälle {len(fields) - len(visited_fields)}.{story.takeoff_airplane_emoji}')
+            print(f'Voit lentää näin monelle jalkapallokentälle: {len(fields) - len(visited_fields)}.{story.takeoff_airplane_emoji}. Värjätyille kentille et voi lentää!')
             print(f'Jalkapallokentät{story.stadium_emoji}:')
             for field in fields:
                 if field['ident'] in visited_fields:
@@ -229,7 +232,7 @@ def main():
                 if played >= 7 and pudotuspeli_voitot >= 4 or pudotuspeli_häviöt > 0:
                     game_over = True
                 vaiheet = ['16-parhaan joukko', '8-parhaan joukko', 'Semi-finaali', 'Finaali']
-                print(f'Ottelut: {played}/7. Voitot: {score}/{played}. Matkustuskerrat: {yritykset}'
+                print(f'Ottelut: {played}/7. Voitot: {score}/{played}. Matkustuskerrat: {yritykset}. CO2 päästöt {co2_consumed}.'
                       f' Sinulla on jäljellä {7 - played} ottelua.')
                 print(f'Pudotuspelivaihe: {vaiheet[i]}.')
                 input(Fore.BLUE + 'Paina Enteriä selvittääksesi onko kentällä vastustaja...' + Fore.RESET)
@@ -239,6 +242,7 @@ def main():
                     print(f"Tämän ottelun vastustaja on {goal['name']}...")
                     winning_team = penalty_shootout(goal['name'])
                     yritykset += 1
+                    co2_consumed += 200
                     if winning_team == 'Suomi':
                         score += 1
                         played += 1
@@ -252,7 +256,7 @@ def main():
                         else:
                             # Move to the next field
                             fields = fields_in_range(current_field, all_fields, player_range)
-                            print(f'Voit lentää näin monelle jalkapallokentälle {len(fields) - len(visited_fields)} {story.takeoff_airplane_emoji}.')
+                            print(f'Voit lentää näin monelle jalkapallokentälle {len(fields) - len(visited_fields)} {story.takeoff_airplane_emoji}. Värjätyille kentille et voi lentää!')
                             print(f'Jalkapallokentät {story.stadium_emoji}:')
                             for field in fields:
                                 if field['ident'] in visited_fields:
@@ -289,8 +293,9 @@ def main():
                 else:
                     print(f'Tällä kentällä ei ole vastustajaa. {story.x_emoji} Siirry seuraavalle kentälle. {story.next_emoji}')
                     yritykset += 1
+                    co2_consumed += 200
                     fields = fields_in_range(current_field, all_fields, player_range)
-                    print(f'Voit lentää näin monelle jalkapallokentälle {len(fields) - len(visited_fields)} {story.takeoff_airplane_emoji}.')
+                    print(f'Voit lentää näin monelle jalkapallokentälle {len(fields) - len(visited_fields)} {story.takeoff_airplane_emoji}. Värjätyille kentille et voi lentää!')
                     print(f'Jalkapallokentät {story.stadium_emoji}:')
                     for field in fields:
                         if field['ident'] in visited_fields:
@@ -328,7 +333,7 @@ def main():
 
         if played < 3:
             fields = fields_in_range(current_field, all_fields, player_range)
-            print(f'Voit lentää näin monelle jalkapallokentälle {len(fields) - len(visited_fields)} {story.takeoff_airplane_emoji}.')
+            print(f'Voit lentää näin monelle jalkapallokentälle {len(fields) - len(visited_fields)} {story.takeoff_airplane_emoji}. Värjätyille kentille et voi lentää!')
             print(f'Jalkapallokentät {story.stadium_emoji}:')
             for field in fields:
                 if field['ident'] in visited_fields:
@@ -361,18 +366,18 @@ def main():
         print(Fore.LIGHTYELLOW_EX + f'Pelasit turnauksen kunniakkaasti loppuun ja voitit jokaisen ottelun!{story.fanfare_emoji}' + Fore.RESET)
         print(Fore.LIGHTYELLOW_EX + f'SUOMI ON MAAILMANMESTARI!{story.number1_emoji}' + Fore.RESET)
         print(f'Tilastot{story.diagram_emoji}')
-        print(f'Ottelut: {story.football_emoji} | Voitot: {story.number1_emoji} | Matkustuskerrat: {story.airplane_emoji}')
+        print(f'Ottelut: {story.football_emoji} | Voitot: {story.number1_emoji} | Matkustuskerrat: {story.airplane_emoji} | CO2 päästöt: {story.co2_emoji}')
         print('-' * 30)
-        print(f'{played:<11} | {score:<10} | {yritykset:<16} |')
+        print(f'{played:<11} | {score:<10} | {yritykset:<19} | {co2_consumed:<8}')
         print(f'Loistava suoritus {story.smiley_emoji}')
     # elif yritykset == 3 and played == 3:
     #     print(f'mitäs tehdään')
     else:
         print(f'Taistelit hienosti, mutta et valitettavasti voittanut jokaista peliä.{story.sad_emoji}')
         print(f'Tilastot: {story.diagram_emoji}')
-        print(f'Ottelut: {story.football_emoji} | Voitot: {story.number1_emoji} | Matkustuskerrat: {story.airplane_emoji}')
+        print(f'Ottelut: {story.football_emoji} | Voitot: {story.number1_emoji} | Matkustuskerrat: {story.airplane_emoji} | CO2 päästöt: {story.co2_emoji}')
         print('-' * 30)
-        print(f'{played:<11} | {score:<10} | {yritykset:<16} |')
+        print(f'{played:<11} | {score:<10} | {yritykset:<19} | {co2_consumed:<8}')
         print(f'Parempaa menestystä seuraavalle kerralle!')
 
 
