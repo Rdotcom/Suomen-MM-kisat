@@ -3,6 +3,7 @@ Pelin nimi on Suomen MM-kisat. Peli on Jalkapallon MM-kisojen inspiroima. Pelin 
 
 #### Katso nämä videot:
 Näitä videoita käytettiin apuvälineinä pelin tekemisessä.
+
 [![Watch the videos](https://i.ytimg.com/vi/AVAs9eFomD8/hqdefault.jpg?sqp=-oaymwE2CNACELwBSFXyq4qpAygIARUAAIhCGAFwAcABBvABAfgB_gmAAtAFigIMCAAQARhBIFUoZTAP&rs=AOn4CLCT0c5w686gZCkuXoLKE4GQnl4lHw)](https://youtube.com/playlist?list=PLKenVLUxjmH9AyGZUeNDs8RinDVLQIQXY)
 
 ### Tarina
@@ -24,7 +25,7 @@ Tämä peli käyttää relaatiotietokantakurssin tietokantaa pohjana.
 1. Luo uusi relaatiotietokanta 'footy': `CREATE DATABASE footy;`
 2. Vaiha tietokantaan: `USE footy;`
 3. Tuo sama `lp.sql` niinkuin teit aikaisemmin kurssilla: `source path/to/lp.sql`
-4. Voit pitää `airport` and `contry` taulukot. Poista loput: 
+4. Voit pitää `airport` and `country` taulukot. Poista loput: 
    - `SET FOREIGN_KEY_CHECKS = 0;`
    - `DROP TABLE game;`
    - `DROP TABLE goal;`
