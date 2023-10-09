@@ -381,9 +381,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-# TODO
-""" 
-Lisää vastustajan etsimiseen joku idea. (CO2 päästöt?, nopeuskisa?...)
-Lisää oikoreiti testauksia varten (if == jotain --> pääset tiettyyn kohtaan peliä) 
-"""
