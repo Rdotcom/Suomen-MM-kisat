@@ -355,9 +355,9 @@ def main():
                 except ValueError:
                     print(f"Virheellinen syöte. {story.x_emoji} Syötä kohdekentän ICAO-koodi.")
     # Tarkista voittaako kaikki pelit
-    if score == 7:
+    if score == 7 or pudotuspeli_voitot == 4:
         print(Fore.LIGHTYELLOW_EX + f'Se oli siinä! POIKA TULI KOTIIN!!!{story.trophy}{story.trophy}{story.trophy}' + Fore.RESET)
-        print(Fore.LIGHTYELLOW_EX + f'Pelasit turnauksen kunniakkaasti loppuun ja voitit jokaisen ottelun!{story.fanfare_emoji}' + Fore.RESET)
+        print(Fore.LIGHTYELLOW_EX + f'Pelasit turnauksen kunniakkaasti loppuun ja voitit finaalin!{story.fanfare_emoji}' + Fore.RESET)
         print(Fore.LIGHTYELLOW_EX + f'SUOMI ON MAAILMANMESTARI!{story.number1_emoji}' + Fore.RESET)
         print(f'Tilastot {story.diagram_emoji}')
         print(f'Ottelut: {story.football_emoji} | Voitot: {story.number1_emoji} | Matkustuskerrat: {story.airplane_emoji} | CO2 päästöt: {story.co2_emoji}')
