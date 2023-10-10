@@ -158,7 +158,7 @@ def main():
 
     # Alkulohko looppi
     while not game_over:
-        print(f'Ottelut: {played}/7, Voitot: {score}/{played}, Matkustuskerrat: {yritykset}, CO2 päästöt: {co2_consumed}.'
+        print(f'Ottelut: {played}/7, Voitot: {score}/{played}, Matkustuskerrat: {yritykset}, CO2 päästöt: {co2_consumed}kg.'
               f' Sinulla on jäljellä {7 - played} ottelua.')
         # tämän hetkisen kentän info
         airport = get_field_info(current_field)
@@ -229,7 +229,7 @@ def main():
                 if played >= 7 and pudotuspeli_voitot >= 4 or pudotuspeli_häviöt > 0:
                     game_over = True
                 vaiheet = ['16-parhaan joukko', '8-parhaan joukko', 'Semi-finaali', 'Finaali']
-                print(f'Ottelut: {played}/7, Voitot: {score}/{played}, Matkustuskerrat: {yritykset}, CO2 päästöt {co2_consumed}.'
+                print(f'Ottelut: {played}/7, Voitot: {score}/{played}, Matkustuskerrat: {yritykset}, CO2 päästöt {co2_consumed}kg.'
                       f' Sinulla on jäljellä {7 - played} ottelua.')
                 print(f'Pudotuspelivaihe: {vaiheet[i]}.')
                 input(Fore.BLUE + 'Paina Enteriä selvittääksesi onko kentällä vastustaja...' + Fore.RESET)
@@ -362,14 +362,14 @@ def main():
         print(f'Tilastot {story.diagram_emoji}')
         print(f'Ottelut: {story.football_emoji} | Voitot: {story.number1_emoji} | Matkustuskerrat: {story.airplane_emoji} | CO2 päästöt: {story.co2_emoji}')
         print('-' * 30)
-        print(f'{played:<11} | {score:<10} | {yritykset:<19} | {co2_consumed:<8}')
+        print(f'{played:<11} | {score:<10} | {yritykset:<19} | {co2_consumed:<8}kg')
         print(f'Loistava suoritus {story.smiley_emoji}')
     else:
         print(f'Taistelit hienosti, mutta et valitettavasti voittanut jokaista peliä.{story.sad_emoji}')
         print(f'Tilastot {story.diagram_emoji}')
         print(f'Ottelut: {story.football_emoji} | Voitot: {story.number1_emoji} | Matkustuskerrat: {story.airplane_emoji} | CO2 päästöt: {story.co2_emoji}')
         print('-' * 30)
-        print(f'{played:<11} | {score:<10} | {yritykset:<19} | {co2_consumed:<8}')
+        print(f'{played:<11} | {score:<10} | {yritykset:<19} | {co2_consumed:<8}kg')
         print(f'Parempaa menestystä seuraavalle kerralle!')
 
 
