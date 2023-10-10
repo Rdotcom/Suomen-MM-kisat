@@ -317,15 +317,15 @@ def main():
                                 print(f"Virheellinen syöte. {story.x_emoji} Syötä kohdekenttä listalta.")
                         except ValueError:
                             print(f"Virheellinen syöte. {story.x_emoji} Syötä kohdekentän ICAO-koodi.")
-
+        # Jos jää lohkovaiheeseen
         if played >= 3 and lohkopeli_voitot < 2:
             print(f'Valitettavasti et voittanut kahta peliä kolmesta lohkopeliotteluista.'
                   f'Sinun MM-kisa taivel päättyy tähän...')
             game_over = True
-
+        # Jos pelaa kaikki pelit
         if played == 7:
             game_over = True
-
+        # Lohkopelivaiheen kentälle siirtyminen
         if played < 3:
             fields = fields_in_range(current_field, all_fields, player_range)
             print(f'Voit lentää näin monelle jalkapallokentälle: {len(fields) - len(visited_fields)} {story.takeoff_airplane_emoji}. Värjätyille kentille et voi lentää!')
@@ -354,7 +354,7 @@ def main():
                         print(f"Virheellinen syöte. {story.x_emoji} Syötä kohdekenttä listalta.")
                 except ValueError:
                     print(f"Virheellinen syöte. {story.x_emoji} Syötä kohdekentän ICAO-koodi.")
-
+    # Tarkista voittaako kaikki pelit
     if score == 7:
         print(Fore.LIGHTYELLOW_EX + f'Se oli siinä! POIKA TULI KOTIIN!!!{story.trophy}{story.trophy}{story.trophy}' + Fore.RESET)
         print(Fore.LIGHTYELLOW_EX + f'Pelasit turnauksen kunniakkaasti loppuun ja voitit jokaisen ottelun!{story.fanfare_emoji}' + Fore.RESET)

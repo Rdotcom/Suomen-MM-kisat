@@ -22,7 +22,8 @@ Tässä pelissä on myös seitsemän ennalta määriteltyä vastustajaa. Peliss�
 Pelin voittaa vain, jos etenee finaaliin asti ja voittaa finaalin. Pelin vastustajat on arvottu satunnaisesti pelin 16 eri jalkapallostadionille.
 Pelaajan tehtävä on matkustella eri jalkapallostadioneille ja löytää vastustajat. Pelissä ei voi palata samalle lentokentälle tai pelata samaa vastustajaa vastaan uudestaan.
 Pelissä on lohkovaihe ja pudotuspelivaihe. Lohkopelivaiheessa pitää voittaa vähintään kaksi peliä, jonka jälkeen siirryt pudotuspelivaiheeseen.
-Jos et voita vähintään kaksi peliä, häviät pelin. Pudotuspelivaihe on kerrasta poikki. Pelin voittaa, jos etenee finaaliin asti ja voittaa finaalin."""
+Jos et voita vähintään kaksi peliä, häviät pelin. Pudotuspelivaihe on kerrasta poikki. Pelin voittaa, jos etenee finaaliin asti ja voittaa finaalin. Pelissä ei
+ole pronssiottelua tai mitaleita muista sijoista."""
 
 
 rules1 = textwrap.fill(rules, 95)
@@ -47,12 +48,12 @@ def get_rules():
 
 text = "Yhdysvaltojen"
 
-# Color the text for USA in red, white, and blue
+# Väritä yhdysvaltojen väreillä punainen, valkoinen ja sininen
 yhdysvallat = (
-    Fore.RED + text[:4] +  # Color "Yhdysvalto" in red
-    Fore.RESET + text[4:9] +  # Color "jen" in white
-    Fore.BLUE + text[9:] +  # Color "n" in blue
-    Fore.RESET  # Reset color to default
+    Fore.RED + text[:4] +  # Väritä "Yhdy" punaisella
+    Fore.RESET + text[4:9] +  # Väritä "svalt" valkoisella
+    Fore.BLUE + text[9:] +  # Väritä "ojen" sinisellä
+    Fore.RESET  # Nollaa väri takaisin oletusarvoiseksi
 )
 
 
@@ -60,21 +61,21 @@ text = "Meksikon"
 
 # Väritä teksti Meksikon lipun väreillä (vihreä, valkoinen, punainen)
 meksiko = (
-    Fore.GREEN + text[:3] +  # Väritä "Meksikon" vihreäksi
-    Fore.RESET + text[3:6] +  # Jätä "on" valkoiseksi
-    Fore.RED + text[6:] +  # Väritä "on" punaiseksi
+    Fore.GREEN + text[:3] +  # Väritä "Mek" vihreäksi
+    Fore.RESET + text[3:6] +  # Jätä "si" valkoiseksi
+    Fore.RED + text[6:] +  # Väritä "kon" punaiseksi
     Fore.RESET  # Nollaa väri takaisin oletusarvoiseksi
 )
 
 
 text = "Kanadan"
 
-# Color the text for Canada in red and white
+# Väritä teksti Kanadan lipun väreillä punainen ja valkoinen
 kanada = (
-    Fore.RED + text[:2] +  # Color "Kan" in red
-    Fore.RESET + text[2:5] +  # Keep "adan" in white
-    Fore.RED + text[5:] +  # Color "an" in red
-    Fore.RESET  # Reset color to default
+    Fore.RED + text[:2] +  # Väritä "Ka" punaisella
+    Fore.RESET + text[2:5] +  # Väritä "nad" valkoisella
+    Fore.RED + text[5:] +  # Väritä "an" punaisella
+    Fore.RESET  # Nollaa väri takaisin oletusarvoiseksi
 )
 
 
@@ -86,7 +87,7 @@ text = """
  |____/ \___/ \___/|_|  |_|_____|_| \_|   |_|  |_|_|  |_|     |_|\_\___|____/_/   \_\_|  
 """
 
-# Suomen lipun värit: sininen, valkoinen ja punainen
+# Suomen lipun värit: sininen ja valkoinen
 colors = [Fore.BLUE, Fore.WHITE]
 
 # Väritetään teksti Suomen lipun väreissä
