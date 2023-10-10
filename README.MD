@@ -32,6 +32,7 @@ Tämä peli käyttää relaatiotietokantakurssin tietokantaa pohjana.
    - `DROP TABLE goal_reached;`
    - `SET FOREIGN_KEY_CHECKS = 1;`
 5. Luo seuraavat taulukot:
+
    ```sql
      create table game (
    id int auto_increment primary key,
