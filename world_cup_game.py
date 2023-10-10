@@ -15,6 +15,7 @@ conn = mysql.connector.connect(
 )
 
 
+# Pelin funktiot
 def get_fields():
     sql = """SELECT * from wc_fields ORDER BY RAND();"""
     cursor = conn.cursor(dictionary=True)
@@ -23,7 +24,6 @@ def get_fields():
     return result
 
 
-# get all goals
 def get_opponents():
     sql = "SELECT * FROM world;"
     cursor = conn.cursor(dictionary=True)
@@ -38,14 +38,14 @@ def create_game(start_points, p_range, cur_airport, p_name, a_fields):
     cursor.execute(sql, (start_points, p_range, cur_airport, p_name))
     o_id = cursor.lastrowid
 
-    # add goals / loot boxes
+    # Lisää vastustajat
     opponents = get_opponents()
     opp_list = []
     for opp in opponents:
         for i in range(0, opp['probability'], 1):
             opp_list.append(opp['id'])
 
-    # exclude starting airport
+    # älä lisää vastustajaa aloituskentälle
     opp_ports = a_fields[1:].copy()
     random.shuffle(opp_ports)
 
@@ -57,7 +57,7 @@ def create_game(start_points, p_range, cur_airport, p_name, a_fields):
     return o_id
 
 
-# get airport info
+# kentän info
 def get_field_info(icao):
     sql = f'''SELECT iso_country, ident, name, latitude_deg, longitude_deg
                   FROM wc_fields
@@ -68,6 +68,7 @@ def get_field_info(icao):
     return result
 
 
+# tarkista onko kentällä vastustaja
 def check_goal(g_id, cur_airport):
     sql = f'''SELECT arenas.id, goal, name, points 
     FROM arenas 
@@ -82,6 +83,7 @@ def check_goal(g_id, cur_airport):
     return result
 
 
+# laske etäisyys
 def calculate_distance(current, target):
     start = get_field_info(current)
     end = get_field_info(target)
@@ -99,14 +101,15 @@ def fields_in_range(icao, a_fields, p_range):
     return in_range
 
 
+# päivitä pelaajan uusi sijainti
 def update_location(icao, p_range, u_points, g_id):
     sql = f'''UPDATE game SET location = %s, player_range = %s, points = %s WHERE id = %s'''
     cursor = conn.cursor(dictionary=True)
     cursor.execute(sql, (icao, p_range, u_points, g_id))
 
 
-# game stars
-# game loop
+# Peli alkaa
+# Peli looppi
 def main():
     print(story.colored_text)
     visited_fields = []
@@ -115,57 +118,54 @@ def main():
     if storyDialog == 'k':
         story.get_story()
 
-
     rulesDialog = input('Haluatko lukea pelin säännöt? (K/E): ').lower()
     if rulesDialog == 'k':
         story.get_rules()
 
-
-
+    # Tervetuloa teksti
     usa = story.yhdysvallat
     meksiko = story.meksiko
     kanada = story.kanada
     print(f'Tervetuloa {usa} {story.statue_of_liberty_emoji}, {meksiko} {story.cactus_emoji} ja {kanada} {story.maple_emoji} 2026 MM-kisoihin.')
     player = input('Syötä pelaaja nimesi: ')
 
-    # check if the game is over
+    # Tarkista pelin tilanne
     game_over = False
 
-    # check if the player has won
-    win = False
-
-    # starting money
+    # Aloitus raha
     points = 0
 
-    # starting range
+    # Aloitus etäisyys
     player_range = 5000
 
+    # Pelaajan tilastot
     played = 0
     yritykset = 0
     co2_consumed = 0
-    # count the player score
     score = 0
 
-    # all airports
+    # Tallenna kaikki kentät muuttujaan
     all_fields = get_fields()
-    # starting point
+
+    # Aloitus kenttä muuttujaan
     start_fields = all_fields[0]['ident']
 
-    # current airport
+    # Tämän hetkinen kenttä muuttujaan
     current_field = start_fields
 
-    # game id
+    # Pelin id
     game_id = create_game(points, player_range, start_fields, player, all_fields)
 
+    # Alkulohko looppi
     while not game_over:
         print(f'Ottelut: {played}/7, Voitot: {score}/{played}, Matkustuskerrat: {yritykset}, CO2 päästöt: {co2_consumed}.'
               f' Sinulla on jäljellä {7 - played} ottelua.')
-        # get current airport info
+        # tämän hetkisen kentän info
         airport = get_field_info(current_field)
         print(f"Saavuit jalkapallokentälle: {airport['name']} {story.landing_airplane_emoji}.")
         input(Fore.BLUE + 'Paina Enteriä selvittääksesi onko kentällä vastustaja...' + Fore.RESET)
-        # if airport has an opponent the player plays them
-        # check the goal type and add if wins
+        # Jos kentällä on vastustaja pelaaja pelaa ottelun
+        # Tarkista vastustaja ja lisää ehdot voitolle
         goal = check_goal(game_id, current_field)
         if goal:
             print(f'Tällä kentällä on vastustaja. {story.check_mark_emoji} Valmistaudu!')
@@ -189,11 +189,7 @@ def main():
             yritykset += 1
             co2_consumed += 200
 
-        # if yritykset <= 3 and played <= 3 and score == 3:
-        #     print(f'Löysit kolmella ensimmäisellä yrityksellä vastustajia ja voitit jokaisen niistä!')
-        #     game_over = True
-
-
+        # Tarkista selvisikö pelaaja pudotuspelivaiheeseen
         if played >= 3 and lohkopeli_voitot >= 2:
             print(f'Onnittelut! Selvisit pudotuspelikierrokselle! {story.smiley_emoji}')
             fields = fields_in_range(current_field, all_fields, player_range)
@@ -225,6 +221,7 @@ def main():
                 except ValueError:
                     print(f"Virheellinen syöte. {story.x_emoji} Syötä kohdekentän ICAO-koodi.")
 
+            # Pudotuspeli looppi
             i = 0
             pudotuspeli_voitot = 0
             pudotuspeli_häviöt = 0
@@ -254,14 +251,13 @@ def main():
                         if played >= 7 and pudotuspeli_voitot >= 4 or pudotuspeli_häviöt > 0:
                             game_over = True
                         else:
-                            # Move to the next field
                             fields = fields_in_range(current_field, all_fields, player_range)
                             print(f'Voit lentää näin monelle jalkapallokentälle: {len(fields) - len(visited_fields)} {story.takeoff_airplane_emoji}. Värjätyille kentille et voi lentää!')
                             print(f'Jalkapallokentät {story.stadium_emoji}:')
                             for field in fields:
                                 if field['ident'] in visited_fields:
                                     f_distance = calculate_distance(current_field, field['ident'])
-                                    # Print visited fields in red
+                                    # Tulosta vieraillut kentät vihreällä
                                     print(
                                         f"{Fore.GREEN}ICAO: {field['ident']}, Name: {field['name']}, Distance: {f_distance:.0f}km (Vierailtu!){Fore.RESET}")
                                 else:
@@ -300,7 +296,6 @@ def main():
                     for field in fields:
                         if field['ident'] in visited_fields:
                             f_distance = calculate_distance(current_field, field['ident'])
-                            # Print visited fields in red
                             print(
                                 f"{Fore.GREEN}ICAO: {field['ident']}, Name: {field['name']}, Distance: {f_distance:.0f}km (Vierailtu!){Fore.RESET}")
                         else:
@@ -338,7 +333,6 @@ def main():
             for field in fields:
                 if field['ident'] in visited_fields:
                     f_distance = calculate_distance(current_field, field['ident'])
-                    # Print visited fields in red
                     print(
                         f"{Fore.GREEN}ICAO: {field['ident']}, Name: {field['name']}, Distance: {f_distance:.0f}km (Vierailtu!){Fore.RESET}")
                 else:

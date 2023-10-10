@@ -1,4 +1,5 @@
 import textwrap
+from colorama import Fore
 
 story = """Olet Huuhkajien kapteeni. Saavuit Yhdysvaltoihin osallistuaksesi vuoden 2026 FIFAn MM-kisoihin.
 Olet taistellut urhoollisesti karsintavaiheen läpi ja tehnyt maastasi ylpeän. Nyt alkaa todellinen taistelu!
@@ -43,9 +44,6 @@ def get_rules():
         print(f'| {line.ljust(max_width)} |')
     print('+' + '-' * (max_width + 2) + '+')
 
-from colorama import Fore, Style
-
-from colorama import Fore, Style
 
 text = "Yhdysvaltojen"
 
@@ -58,9 +56,6 @@ yhdysvallat = (
 )
 
 
-
-from colorama import Fore, Style
-
 text = "Meksikon"
 
 # Väritä teksti Meksikon lipun väreillä (vihreä, valkoinen, punainen)
@@ -71,7 +66,6 @@ meksiko = (
     Fore.RESET  # Nollaa väri takaisin oletusarvoiseksi
 )
 
-from colorama import Fore, Style
 
 text = "Kanadan"
 
@@ -84,8 +78,6 @@ kanada = (
 )
 
 
-from colorama import Fore
-
 text = """
   ____  _   _  ___  __  __ _____ _   _     __  __ __  __       _  _____ ____    _  _____ 
  / ___|| | | |/ _ \|  \/  | ____| \ | |   |  \/  |  \/  |     | |/ /_ _/ ___|  / \|_   _|
@@ -95,7 +87,7 @@ text = """
 """
 
 # Suomen lipun värit: sininen, valkoinen ja punainen
-colors = [Fore.BLUE, Fore.WHITE, Fore.RED]
+colors = [Fore.BLUE, Fore.WHITE]
 
 # Väritetään teksti Suomen lipun väreissä
 colored_text = ""
