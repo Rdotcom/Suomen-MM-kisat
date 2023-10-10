@@ -38,8 +38,7 @@ Tämä peli käyttää relaatiotietokantakurssin tietokantaa pohjana.
    points int(11) null,
    location varchar(10) null,
    screen_name  varchar(40) null,
-   player_range int null
-);
+   player_range int null);
    
    ```sql
     create table world (
