@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>World Cup Game</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+    <link href="main.css" rel="stylesheet">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin="" defer></script>
+    <script src="map.js" defer></script>
+</head>
+<body>
+<div class="container">
+    <header class="page-header">
+        <h1 class="page-title">World Cup Game</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+</div>
+
+<div id="map">
+    </div>
+    <div class="box">
+        <header>
+            <h2>Tiedot</h2>
+        </header>
+        <table>
+            <tr>
+                <td colspan="2">
+                    <h3 id="player-name">Player Name</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>Tehdyt CO2-päästöt: <span id="co2-päästöt"> 0</span></td>
+                <td>Jäljellä olevat CO2: <span id="co2">1000 kg</span></td>
+                <td>matkustuskerrat: <span id="matkustuskerrat"> 0</span></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
