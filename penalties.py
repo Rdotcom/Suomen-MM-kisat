@@ -4,7 +4,7 @@ CENTER = 0
 LEFT = 1
 RIGHT = 2
 
-
+O = "\u26BD"
 def dive():
     number = random.randint(1, 2)
     return number
@@ -20,16 +20,16 @@ def goal(kick_direction, dive_direction):
 
 def print_ball(ball):
     if ball == 1:
-        print("-----------------")
-        print("| O             |")
-        print("|               |")
-        print("|               |")
+        print(f"------------------")
+        print(f"| {O}             |")
+        print(f"|                |")
+        print(f"|                |")
 
     if ball == 2:
-        print("-----------------")
-        print("|             O |")
-        print("|               |")
-        print("|               |")
+        print(f"------------------")
+        print(f"|             {O} |")
+        print(f"|                |")
+        print(f"|                |")
 
 
 def print_goalkeeper(goalkeeper):
@@ -47,15 +47,15 @@ def print_goalkeeper(goalkeeper):
 
 
 def penalty_shootout(team):
-    seed_number = 87
-    random.seed(seed_number)
+    # seed_number = 87
+    # random.seed(seed_number)
 
     print("-----------------")
     print("|     _ o _     |")
     print("|       |       |")
     print("|      / \      |")
 
-    number_of_rounds = 1
+    number_of_rounds = 5
     team1 = 'Suomi'
     team2 = team
     game_continues = True
@@ -84,18 +84,30 @@ def penalty_shootout(team):
                 team1_turn += 1
 
             if current_team == team1:
-                kick = int(input(f"Kumpaan suuntaan pelaaja vetää?? (1: vasemmalle/2: oikealle)\n"))
-                while kick != 1 and kick != 2:
-                    print(f'Syötä 1 tai 2')
-                    kick = int(input(f"Kumpaan suuntaan pelaaja vetää? (1: vasemmalle/2: oikealle)\n"))
+                while True:
+                    try:
+                        kick = int(input(f"Kumpaan suuntaan pelaaja vetää?? (1: vasemmalle/2: oikealle)\n"))
+                        if kick == 1 or kick == 2:
+                            break
+                        else:
+                            print(f'Syötä 1 tai 2')
+                    except ValueError:
+                        print(f'Syötteen pitää olla kokonaisluku.')
+
             else:
                 kick = random.randint(1, 2)
 
             if current_team == team2:
-                dive_direction = int(input(f"Minne maalivahti hyppää? (1: vasemmalle/2: oikealle)\n"))
-                while dive_direction != 1 and dive_direction != 2:
-                    print(f'Syötä 1 tai 2')
-                    dive_direction = int(input(f"Minne maalivahti hyppää? (1: vasemmalle/2: oikealle)\n"))
+                while True:
+                    try:
+                        dive_direction = int(input(f"Minne maalivahti hyppää? (1: vasemmalle/2: oikealle)\n"))
+                        if dive_direction == 1 or dive_direction == 2:
+                            break
+                        else:
+                            print(f'Syötä 1 tai 2')
+                    except ValueError:
+                        print(f'Syötteen pitää olla kokonaisluku.')
+
             else:
                 dive_direction = dive()
 
